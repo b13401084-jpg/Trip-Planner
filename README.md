@@ -1,140 +1,188 @@
 # 🗺️ Trip Planner
 
-A collaborative web application for multi-user synchronized trip planning.
+A multi-user synchronized trip planning web application built with Next.js, TypeScript, and Tailwind CSS.
 
-## Overview
+## 🚀 Features
 
-Trip Planner enables users to:
-- Plan trips together in real-time
-- View and manage routes on interactive maps (Google Maps)
-- Create daily itineraries with time and location details
-- Track attractions and highlights
-- Manage transportation methods and tickets
-- Organize important documents and files
-- Split expenses and manage budgets
-- Get AI-assisted planning suggestions
+- 📍 **Map Integration** - Google Maps with route planning
+- 📅 **Daily Itinerary** - Schedule activities and assign tasks
+- 🎯 **Highlights & Attractions** - Discover and track must-see places
+- 🚗 **Transportation** - Manage travel modes and tickets
+- 📁 **Document Storage** - Store files and tickets
+- 🤝 **Real-time Sync** - Multi-user collaboration
+- 💰 **Expense Splitting** - Track and divide costs
+- 🤖 **AI Assistant** - Get planning suggestions
+- 📊 **Route Optimization** - Optimize your travel routes
+- 🔐 **Authentication** - Secure multi-user system
 
-## Core Features
-
-1. **Homepage** - Multiple trip plans hub
-2. **Map Functionality** - Google Maps integration with route planning and waypoint management
-3. **Daily Itinerary** - Schedule tables with time, location, and themes
-4. **Attractions & Highlights** - Track must-see places and artwork
-5. **Transportation** - Mode selection and ticket management
-6. **Document Folder** - Store tickets, PDFs, and important files
-
-## Advanced Features
-
-1. **Route Optimization** - Auto-optimize travel routes
-2. **Task Assignment** - Assign responsibilities with @mentions and voting
-3. **Wikipedia Integration** - Auto-populate attraction information
-4. **Expense Splitting** - Track shared costs and budget management
-5. **QR Code Support** - Upload QR codes for tickets
-6. **AI Assistance** - Planning suggestions and recommendations
-
-## Tech Stack
-
-- **Frontend**: React 18, Next.js 14, TypeScript, Tailwind CSS
-- **Maps**: Google Maps API
-- **State Management**: Zustand
-- **HTTP Client**: Axios
-- **Styling**: Tailwind CSS
-- **Linting**: ESLint
-
-## Getting Started
-
-### Prerequisites
+## 📋 Prerequisites
 
 - Node.js >= 18.0.0
 - npm >= 9.0.0
+- Google Maps API Key
 
-### Installation
+## 🛠️ Installation
+
+### 1. Clone the Repository
 
 ```bash
-# Clone the repository
 git clone https://github.com/b13401084-jpg/Trip-Planner.git
 cd Trip-Planner
+```
 
-# Install dependencies
+### 2. Install Dependencies
+
+```bash
 npm install
+```
 
-# Create environment file
+### 3. Setup Environment Variables
+
+Create a `.env.local` file in the project root:
+
+```bash
 cp .env.example .env.local
-
-# Add your API keys to .env.local
-# - Google Maps API Key
-# - Other required credentials
 ```
 
-### Development
+Then update with your values:
+
+```env
+# Google Maps API Key
+NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=your_google_maps_api_key_here
+
+# API Configuration
+NEXT_PUBLIC_API_URL=http://localhost:3000/api
+NEXT_PUBLIC_APP_NAME=Trip Planner
+```
+
+**Getting Google Maps API Key:**
+1. Go to [Google Cloud Console](https://console.cloud.google.com/)
+2. Create a new project
+3. Enable Maps JavaScript API
+4. Create an API Key
+5. Add it to `.env.local`
+
+### 4. Run Development Server
 
 ```bash
-# Start development server
 npm run dev
-
-# Open http://localhost:3000 in your browser
 ```
 
-### Building
+Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+## 📁 Project Structure
+
+```
+Trip-Planner/
+├── src/
+│   ├── app/              # Next.js App Router pages
+│   ├── components/       # React components
+│   │   ├── Map/         # Map integration components
+│   │   ├── Itinerary/   # Itinerary components
+│   │   ├── Highlights/  # Attractions components
+│   │   └── Transportation/ # Transport components
+│   ├── hooks/           # Custom React hooks
+│   ├── store/           # Zustand store
+│   ├── types/           # TypeScript types
+│   ├── utils/           # Utility functions
+│   └── styles/          # Global styles
+├── public/              # Static assets
+├── package.json         # Dependencies
+├── tsconfig.json        # TypeScript config
+├── tailwind.config.ts   # Tailwind config
+└── next.config.js       # Next.js config
+```
+
+## 🏗️ Development
+
+### Feature Branches
+
+Project uses feature branches for development:
 
 ```bash
-# Build for production
-npm run build
+# Map Integration
+git checkout feature/map-integration
 
-# Start production server
+# Daily Itinerary
+git checkout feature/daily-itinerary
+
+# Highlights & Attractions
+git checkout feature/highlights-attractions
+
+# And more...
+```
+
+### Build
+
+```bash
+npm run build
 npm start
 ```
 
 ### Type Checking
 
 ```bash
-# Run TypeScript type check
 npm run type-check
 ```
 
-## Project Structure
+### Linting
 
-```
-Trip-Planner/
-├── src/
-│   ├── app/              # Next.js app directory
-│   ├── components/       # Reusable React components
-│   ├── pages/            # API routes
-│   ├── store/            # Zustand state management
-│   ├── hooks/            # Custom React hooks
-│   ├── utils/            # Utility functions
-│   ├── types/            # TypeScript type definitions
-│   └── styles/           # Global styles
-├── public/               # Static assets
-├── .env.example          # Environment variables template
-├── .gitignore            # Git ignore rules
-├── .eslintrc.json        # ESLint configuration
-├── next.config.js        # Next.js configuration
-├── tsconfig.json         # TypeScript configuration
-├── tailwind.config.ts    # Tailwind CSS configuration
-├── package.json          # Project dependencies
-└── README.md             # This file
+```bash
+npm run lint
 ```
 
-## Environment Variables
+## 🧪 Testing
 
-See `.env.example` for all required environment variables:
+```bash
+npm run test
+```
 
-- `NEXT_PUBLIC_GOOGLE_MAPS_API_KEY` - Google Maps API key
-- `DATABASE_URL` - Database connection string
-- `NEXT_AUTH_SECRET` - Authentication secret
-- Other third-party API keys
+## 🚀 Deployment
 
-## Contributing
+### Deploy to Vercel
+
+```bash
+npm install -g vercel
+vercel
+```
+
+### Docker
+
+```dockerfile
+FROM node:18-alpine
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci
+COPY . .
+RUN npm run build
+EXPOSE 3000
+CMD ["npm", "start"]
+```
+
+## 📚 Tech Stack
+
+- **Frontend**: React 18, Next.js 14
+- **Styling**: Tailwind CSS
+- **State Management**: Zustand
+- **Maps**: Google Maps API
+- **HTTP Client**: Axios
+- **Language**: TypeScript
+- **Build Tool**: Next.js
+
+## 🤝 Contributing
 
 1. Create a feature branch from `main`
 2. Make your changes
 3. Submit a pull request
 
-## License
+## 📝 License
 
 MIT
 
-## Support
+## 👨‍💻 Author
 
-For questions or issues, please open a GitHub issue.
+Fang (b13401084-jpg)
+
+## 📞 Support
+
+For issues and questions, please open a GitHub issue.
